@@ -8,6 +8,7 @@ from pygameMenu.examples.game_selector import COLOR_BACKGROUND
 import DesafioAlfabeto
 import DesafioFormas
 import DesafioMatematica
+import Avatar
 
 pygame.init()
 
@@ -48,8 +49,6 @@ main_menu = pygameMenu.Menu(tela,
                                 window_width=800
                                 )
 
-
-
 def main_background():
     """
     Function used by menus, draw on background while menu is active.
@@ -67,7 +66,6 @@ def desafioAlfabeto():
     DesafioAlfabeto.jogar()
 
 def desafioFormas():
-
     DesafioFormas.jogar()
 
 
@@ -78,6 +76,10 @@ main_menu.add_option('Desafio Formas', desafioFormas)
 main_menu.add_option('Sair', pygameMenu.events.EXIT)
 
 
+imagemAvatar = pygame.image.load("Imagens/Avatar.jpg")
+avatar = Avatar(imagemAvatar, "AvatarTeste", 0, 0)
+
+
 def mainMenu(test = False):
     while True:
 
@@ -85,6 +87,7 @@ def mainMenu(test = False):
         for event in events:
             if event.type == QUIT:
                 exit()
+            avatar.movimentar()
         tela.fill(COR_BRANCA)
 
         main_menu.draw()
@@ -102,9 +105,9 @@ def mainMenu(test = False):
 
             # Clock tick
 
-
+        avatar.desenhar()
         pygame.display.update()
-
+        
 
 
 mainMenu()
