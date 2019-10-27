@@ -15,19 +15,20 @@ b = random.randint(0,100)
 
 
 
-class DesafioMat:
+class DesafioMatDois:
 
     def __init__(self):
 
-        self.reset_problem = False
+
         self.score = 0
         self.problem = {"num1":0,"num2":0,"result":0}
         self.button_list = self.get_button_list()
+        self.reset_problem = False
 
         self.sound_1 = pygame.mixer.Sound("item1.ogg")
         self.sound_2 = pygame.mixer.Sound("item2.ogg")
         self.backButton = Button(700, 10, 50, 50, "<")
-        self.jogar = True
+        self.operation = ""
     def check_result(self):
         """ Check the result """
         for button in self.button_list:
@@ -50,15 +51,26 @@ class DesafioMat:
                 # a second
                 self.reset_problem = True
 
-    def addition(self):
 
-        a = random.randint(0,100)
-        b = random.randint(0,100)
+    def multiplication(self):
+        """ These will set num1,num2,result for multiplication """
+        a = random.randint(0,12)
+        b = random.randint(0,12)
         self.problem["num1"] = a
         self.problem["num2"] = b
-        self.problem["result"] = a + b
+        self.problem["result"] = a * b
         self.button_list = self.get_button_list()
-        self.operation = "addition"
+        self.operation = "x"
+    def division(self):
+        """ These will set num1,num2,result for division """
+        divisor = random.randint(1,12)
+        dividend = divisor * random.randint(1,12)
+        quotient = dividend / divisor
+        self.problem["num1"] = dividend
+        self.problem["num2"] = divisor
+        self.problem["result"] = quotient
+        self.button_list = self.get_button_list()
+        self.operation = ":"
 
     def get_button_list(self):
             """ Return a list with four buttons """
@@ -114,7 +126,7 @@ class DesafioMat:
 
         label_1 = font.render(str(self.problem["num1"]),True,BLACK)
         label_2 = font.render(str(self.problem["num2"])+" = ?",True,BLACK)
-        operacao = font.render("+",True,BLACK)
+        operacao = font.render(self.operation,True,BLACK)
 
                 # t_w: total width
         t_w = label_1.get_width() + label_2.get_width() + 64 # 64: length of symbol
@@ -124,9 +136,12 @@ class DesafioMat:
         tela.blit(label_2,(posX + label_1.get_width() + 64,50))
         tela.blit(operacao,(posX+label_1.get_width()/2+32,50))
         if self.reset_problem:
-            # wait 1 second
+            proxOperacao= random.randint(1,2)
             pygame.time.wait(1000)
-            self.addition()
+            if proxOperacao==1:
+                self.multiplication()
+            else:
+                self.division()
             self.reset_problem = False
 
     def checa_resultado(self, posx, posy):
@@ -149,10 +164,9 @@ class DesafioMat:
     def backButton_isPressed(self):
 
        if self.backButton.isPressed():
-           f= open("ranking.txt","a+")
+           f= open("ranking2.txt","a+")
            f.write(str(self.score)+"\n")
            f.close()
-           self.jogar=False
            import menu
            menu.mainMenu()
 
@@ -225,11 +239,9 @@ tela = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
 def jogar():
     tela = pygame.display.set_mode((SCREEN_WIDTH,SCREEN_HEIGHT))
     score = 0
-    desafioMatematica = DesafioMat()
-    desafioMatematica.addition()
+    desafioMatematica = DesafioMatDois()
+    desafioMatematica.division()
     clock = pygame.time.Clock()
-
-
 
     counter, text = 0, '0'.rjust(3)
     pygame.time.set_timer(pygame.USEREVENT, 1000)
@@ -239,7 +251,7 @@ def jogar():
     posY=200
 
 
-    while desafioMatematica.jogar :
+    while True:
 
 
         events =  pygame.event.get()
@@ -302,13 +314,7 @@ def jogar():
 
 
 
-
-
-
-
-
 if __name__ == '__main__':
     # test1.py executed as script
     # do something
     jogar()
-

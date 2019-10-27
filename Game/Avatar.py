@@ -1,43 +1,31 @@
+import pygame
+import pygameMenu
+import sys
+from pygame.locals import *
+from pygameMenu.config import MENU_SELECTED_DRAW
+from pygameMenu.examples.game_selector import COLOR_BACKGROUND
+from pygame import event
 class Avatar:
     def __init__(self, imagem, nome, posx, posy):
         self.imagem = imagem
         self.score = 0
         self.nome = nome
-        self.pos = Vector2()
-        self.pos.x = posx
-        self.pos.y = posy
+        self.posx = posx
+        self.posy = posy
         self.andar = False
-        
-        
+
+
     def movimentar(self):
         v = pygame.Vector2()
-        
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_d:
-                v.x = 1
-            if event.key == pygame.K_a:
-                v.x = -1
-            if event.key == pygame.K_w:
-                v.y = -1
-            if event.key == pygame.K_s:
-                v.y = 1
-            self.andar = True
+        keys= pygame.key.get_pressed()
 
-        if event.type == pygame.KEYUP:
-            if event.key == pygame.K_d:
-                v.x = 0
-            if event.key == pygame.K_a:
-                v.x = 0
-            if event.key == pygame.K_w:
-                v.y = 0
-            if event.key == pygame.K_s:
-                v.y = 0
-            self.andar = False
+        if keys[K_d]:
 
-        if self.andar == True:
-            self.pos += v
+            self.posx = +1
+        if keys[K_a]:
+            self.posy = -1
+
+
 
     def desenhar(self, surface):
-        surface.blit(imagem, posicao)
-
-    
+        surface.blit(self.imagem, (self.posx, self.posy))
