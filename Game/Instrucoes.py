@@ -31,10 +31,13 @@ def jogar():
     bg = pygame.image.load("Imagens/menuBackground.jpg")
     font = pygame.font.SysFont("Arial", 24)
     text = "Instruções:" \
-           "\nCaminho com o avatar em direção a resposta correta" \
-           "\nUtilize as setas do teclado para ir para cima, para baixo, para esquerda e para a direita" \
-           "\nQuando acertar o quadradinho ficará verde e você ganhará 5 pontos" \
-           "\nQuando errar o botão ficará vermelho e você não ganhará pontos" \
+           "\nCaminhe com o avatar em direção a resposta correta" \
+           "\nQuando acertar o quadradinho ficará verde e você ganhará 5 pontos, quando errar o botão ficará vermelho e você não ganhará pontos" \
+           "\nDesafio de Matematica I: Nesse nivel você realiza operações de soma simples." \
+           "\nDesafio de Matematica II: Nesse nivel você realiza operações de multiplicação e divisão." \
+           "\nDesafio de Matematica III: Nesse nivel você realiza as 4 operações fundamentais da matematica: Soma, Subtração, Divisão e Multiplicação" \
+           "\nComandos:" \
+           "\nW: para cima S: para baixo D: para a direita A: para a esquerda" \
 
 
     while True:
@@ -48,7 +51,7 @@ def jogar():
 
         tela.fill((255, 255, 255))
         tela.blit(bg,(0,0))
-        blit_text(tela, text, (100, 200), font)
+        blit_text(tela, text, (100, 100), font)
         backButton.draw(tela)
         pygame.display.update()
 

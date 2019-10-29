@@ -13,6 +13,13 @@ import DesafioMatematicaTres
 import DesafioMatematicaDois
 import DesafioMatematica
 
+class LigaSom:
+
+    def __init__(self):
+       self.somLigado = False
+
+
+
 pygame.init()
 
 altura = 600
@@ -21,12 +28,20 @@ tela = pygame.display.set_mode((largura, altura))
 MENU_BACKGROUND_COLOR = (228, 55, 36)
 COR_BRANCA = (255, 255, 255)
 COR_AZUL = (0, 0, 255)
+pygame.mixer.music.load("backGroundSong.mp3")
+pygame.mixer.music.play(-1)
+
+
+
 COR_VERDE = (0, 255, 0)
 avatarImagem = pygame.image.load("imagens/bruno.png")
 
+somLigado = LigaSom()
+
 clock = pygame.time.Clock()
 def main_background():
-    bg = pygame.image.load("Imagens/menuBackground.jpg")
+    bg = pygame.image.load("Imagens/mathBackground.jpg")
+    bg = pygame.transform.scale(bg, (800, 600))
     font = pygame.font.Font("Tipografias/Gameplay.ttf", 36)
     text = font.render("Bem Vindo ao Funact", True,(0,0,0))
     global surface
@@ -85,12 +100,27 @@ def ranking():
 
     Rankings.jogar()
 
+
+def liga_desliga_som(LigaSom):
+
+    if LigaSom.somLigado == False:
+        pygame.mixer.music.pause()
+        LigaSom.somLigado= True
+
+
+    elif LigaSom.somLigado == True:
+        pygame.mixer.music.unpause()
+        LigaSom.somLigado = False
+
+
+
+
 main_menu.add_option('Desafio Matematica', desafioMatematica)
 main_menu.add_option('Desafio Matematica II', desafioMatematicaDois)
 main_menu.add_option('Desafio Matematica III', desafioMatematicaTres)
 main_menu.add_option('Instruções', opcoesJogo)
 main_menu.add_option('Rankings', ranking)
-main_menu.add_option('Sobre', desafioMatematicaTres)
+main_menu.add_option('Ligar/Desligar som', liga_desliga_som, somLigado)
 main_menu.add_option('Sair', pygameMenu.events.EXIT)
 
 def mainMenu(test = False):
@@ -100,10 +130,18 @@ def mainMenu(test = False):
         for event in events:
             if event.type == QUIT:
                 exit()
+
         tela.fill(COR_BRANCA)
 
-        main_menu.draw()
 
+
+
+
+
+
+
+
+        main_menu.draw()
         main_menu.mainloop(events, disable_loop=test)
 
         # Flip surface
