@@ -9,8 +9,13 @@ GREEN = (0,255,0)
 RED = (255,0,0)
 def rankingDesafioI(Surface):
 
-    f= open("ranking.txt", "r")
+    f= open("ranking.txt", "r+")
     linhas = f.readlines()
+    if linhas.__len__()>10:
+        f.truncate(0)
+    linhas = list(map(int, linhas))
+    linhas.sort(reverse= True)
+    linhas = list(map(str, linhas))
     y = 100
     i= 1
     font = pygame.font.SysFont('Arial', 15)
@@ -33,8 +38,15 @@ def rankingDesafioI(Surface):
 
 def rankingDesafioII(Surface):
 
-    f= open("ranking2.txt", "r")
+    f= open("ranking2.txt", "r+")
     linhas = f.readlines()
+    if linhas.__len__()>10:
+        f.truncate(0)
+
+    linhas = list(map(int, linhas))
+    linhas.sort(reverse= True)
+    linhas = list(map(str, linhas))
+
     y = 100
     i= 1
     font = pygame.font.SysFont('Arial', 15)
@@ -57,8 +69,13 @@ def rankingDesafioII(Surface):
 
 def rankingDesafioIII(Surface):
 
-    f= open("ranking3.txt", "r")
+    f= open("ranking3.txt", "r+")
     linhas = f.readlines()
+    if linhas.__len__()>10:
+        f.truncate(0)
+    linhas = list(map(int, linhas))
+    linhas.sort(reverse= True)
+    linhas = list(map(str, linhas))
     y = 100
     i= 1
     font = pygame.font.SysFont('Arial', 15)

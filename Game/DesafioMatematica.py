@@ -15,6 +15,7 @@ b = random.randint(0,100)
 
 
 
+
 class DesafioMat:
 
     def __init__(self):
@@ -28,6 +29,11 @@ class DesafioMat:
         self.sound_2 = pygame.mixer.Sound("item2.ogg")
         self.backButton = Button(700, 10, 50, 50, "<")
         self.jogar = True
+        self.vilao = pygame.image.load("Imagens/vilao3.jpg")
+        self.apareceVilao = False
+        pygame.mixer.music.load("villainlaugh.mp3")
+
+
     def check_result(self):
         """ Check the result """
         for button in self.button_list:
@@ -139,20 +145,27 @@ class DesafioMat:
 
                     self.score += 5
                     self.sound_1.play()
+                    self.apareceVilao = False
+                    self.reset_problem=True
 
                 else:
 
                     button.set_color(RED)
                     self.sound_1.play()
-                self.reset_problem=True
+                    self.apareceVilao = True
+                    pygame.mixer.music.play(-1)
+                    pygame.mixer.music.fadeout(4700)
+                    self.reset_problem=True
 
-    def backButton_isPressed(self):
+
+    def backButton_isPressed(self, Surface):
 
        if self.backButton.isPressed():
            f= open("ranking.txt","a+")
            f.write(str(self.score)+"\n")
            f.close()
-           self.jogar=False
+           import gameover
+           gameover.fimjogo()
            import menu
            menu.mainMenu()
 
@@ -255,29 +268,32 @@ def jogar():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 desafioMatematica.check_result()
-                desafioMatematica.backButton_isPressed()
+                desafioMatematica.backButton_isPressed(tela)
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
+                if event.key == pygame.K_d:
                     posX = posX +15
-                if event.key == pygame.K_LEFT:
+                if event.key == pygame.K_a:
                     posX =posX -15
-                if event.key == pygame.K_DOWN:
+                if event.key == pygame.K_s:
                     if posY>=SCREEN_HEIGHT :
 
                         posY= posY -60
 
                     posY =posY +15
 
-                if event.key == pygame.K_UP:
+                if event.key == pygame.K_w:
                     posY =posY -15
         tela.fill(WHITE)
         tela.blit(avatarImagem, (posX,posY ))
         desafioMatematica.backButton.draw(tela)
         tela.blit(font.render(text, True, (0, 0, 0)), (32, 48))
 
+        if desafioMatematica.apareceVilao == True:
+            tela.blit(desafioMatematica.vilao,(650, 450))
 
         desafioMatematica.checa_resultado(posX, posY)
+
 
 
 
