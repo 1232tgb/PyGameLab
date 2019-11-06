@@ -17,6 +17,8 @@ class LigaSom:
 
     def __init__(self):
        self.somLigado = False
+       self.somRaposa = True
+
 
 
 
@@ -30,6 +32,7 @@ COR_BRANCA = (255, 255, 255)
 COR_AZUL = (0, 0, 255)
 pygame.mixer.music.load("backGroundSong.mp3")
 pygame.mixer.music.play(-1)
+
 
 
 
@@ -82,15 +85,15 @@ def main_background():
 ##Jogo de matematica
 def desafioMatematica():
     avatar = Avatar(avatarImagem, "Bruno", 10, 10)
-    DesafioMatematica.jogar()
+    DesafioMatematica.jogar(somLigado.somRaposa)
 
 
 def desafioMatematicaDois():
-    DesafioMatematicaDois.jogar()
+    DesafioMatematicaDois.jogar(somLigado.somRaposa)
 
 def desafioMatematicaTres():
 
-    DesafioMatematicaTres.jogar()
+    DesafioMatematicaTres.jogar(somLigado.somRaposa)
 
 def opcoesJogo():
 
@@ -108,9 +111,19 @@ def liga_desliga_som(LigaSom):
         LigaSom.somLigado= True
 
 
+
     elif LigaSom.somLigado == True:
         pygame.mixer.music.unpause()
+
         LigaSom.somLigado = False
+
+
+    if LigaSom.somRaposa == True:
+        LigaSom.somRaposa = False
+
+    elif LigaSom.somRaposa == False:
+        LigaSom.somRaposa = True
+
 
 
 
