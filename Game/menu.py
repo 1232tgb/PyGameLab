@@ -17,8 +17,11 @@ class LigaSom:
 
     def __init__(self):
        self.somLigado = False
+<<<<<<< HEAD
        self.somRaposa = True
 
+=======
+>>>>>>> 05b86bde4bc48826badef1c7c2a6aef9e47eb416
 
 
 
@@ -35,7 +38,10 @@ pygame.mixer.music.play(-1)
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 05b86bde4bc48826badef1c7c2a6aef9e47eb416
 COR_VERDE = (0, 255, 0)
 avatarImagem = pygame.image.load("imagens/bruno.png")
 
@@ -111,6 +117,7 @@ def liga_desliga_som(LigaSom):
         LigaSom.somLigado= True
 
 
+<<<<<<< HEAD
 
     elif LigaSom.somLigado == True:
         pygame.mixer.music.unpause()
@@ -126,6 +133,13 @@ def liga_desliga_som(LigaSom):
 
 
 
+=======
+    elif LigaSom.somLigado == True:
+        pygame.mixer.music.unpause()
+        LigaSom.somLigado = False
+
+
+>>>>>>> 05b86bde4bc48826badef1c7c2a6aef9e47eb416
 
 
 main_menu.add_option('Desafio Matematica', desafioMatematica)

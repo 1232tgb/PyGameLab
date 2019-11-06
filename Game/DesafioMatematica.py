@@ -31,7 +31,12 @@ class DesafioMat:
         self.jogar = True
         self.vilao = pygame.image.load("Imagens/vilao3.jpg")
         self.apareceVilao = False
+<<<<<<< HEAD
         self.somVilao =pygame.mixer.Sound
+=======
+        pygame.mixer.music.load("villainlaugh.mp3")
+
+>>>>>>> 05b86bde4bc48826badef1c7c2a6aef9e47eb416
 
     def check_result(self):
         """ Check the result """
@@ -148,12 +153,19 @@ class DesafioMat:
                     button.set_color(RED)
                     self.sound_1.play()
                     self.apareceVilao = True
+<<<<<<< HEAD
 
                     if ligaSom == True:
                         Sound.play()
                         print("ola")
                     self.reset_problem=True
 
+=======
+                    pygame.mixer.music.play(-1)
+                    pygame.mixer.music.fadeout(4700)
+                    self.reset_problem=True
+
+>>>>>>> 05b86bde4bc48826badef1c7c2a6aef9e47eb416
 
     def backButton_isPressed(self, Surface):
 
@@ -288,6 +300,8 @@ def jogar(somRaposa):
         desafioMatematica.backButton.draw(tela)
         tela.blit(font.render(text, True, (0, 0, 0)), (32, 48))
 
+        if desafioMatematica.apareceVilao == True:
+            tela.blit(desafioMatematica.vilao,(650, 450))
 
 
 
@@ -310,6 +324,7 @@ def jogar(somRaposa):
             tela.blit(desafioMatematica.vilao,(650, 450))
 
         desafioMatematica.checa_resultado(posX, posY, somVilao, somRaposa)
+
 
 
 
